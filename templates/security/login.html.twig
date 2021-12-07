@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <h3 class="text-center text-2xl mt-2 font-bold">Prisijungti</h3>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form method="post">
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
+                    El. paštas
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                       value="{{ last_username }}" name="email" id="email"
+                       type="text" placeholder="El. paštas" autofocus>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+                    Slaptažodis
+                </label>
+                <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+                       id="password" name="password" type="password" placeholder="***************" autocomplete="current-password">
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Prisijungti
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-blue-400 hover:text-blue-500" href="#">
+                    Pamiršote slaptažodį?
+                </a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

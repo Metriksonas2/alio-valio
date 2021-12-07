@@ -1,0 +1,11 @@
+<h1>Sveiki, {{ firstName }}! Patvirtinkite savo <strong>Alio-Valio</strong> paskyros el.paštą!</h1>
+
+<p>
+    Patvirtinkite savo el. paštą paspaudę ant šios nuorodos: <br><br>
+    <a href="{{ signedUrl }}">Patvirtinti el. paštą</a>.
+    Ši nuoroda baigs galioti po {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p>
+
+<p>
+    Sveikiname prisijungus!
+</p>
