@@ -67,14 +67,14 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
-        ->add('birthDate', DateType::class, [
-            'label' => false,
-            'widget' => 'single_text',
-            'html5' => false,
-            'required' => false,
-            'format' => 'yyyy-MM-dd',
-            'attr' => ['class' => 'js-datepicker']
-        ])
+            ->add('birthDate', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+                'html5' => false,
+                'required' => false,
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'js-datepicker']
+            ])
 //            ->add('agreeTerms', CheckboxType::class, [
 //                'mapped' => false,
 //                'constraints' => [
@@ -83,24 +83,24 @@ class RegistrationFormType extends AbstractType
 //                    ]),
 //                ],
 //            ])
-        ->add('plainPassword', PasswordType::class, [
-            'label' => false,
-            'mapped' => false,
-            'attr' => [
-                'class' => 'shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3',
-                'autocomplete' => 'new-password'
-            ],
-            'constraints' => [
-                new NotBlank([
-                    'message' => 'Įveskite slaptažodį',
-                ]),
-                new Length([
-                    'min' => 6,
-                    'minMessage' => 'Slaptažodis turi būti bent 6 simbolių ilgio',
-                    'max' => 4096,
-                ]),
-            ],
-        ]);
+            ->add('plainPassword', PasswordType::class, [
+                'label' => false,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3',
+                    'autocomplete' => 'new-password'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Įveskite slaptažodį',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Slaptažodis turi būti bent 6 simbolių ilgio',
+                        'max' => 4096,
+                    ]),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

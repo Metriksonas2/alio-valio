@@ -5,7 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -15,6 +15,49 @@
         {% endblock %}
     </head>
     <body>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <nav class="flex items-center flex-wrap p-2 pb-0">
+                <div class="flex items-center flex-shrink-0 ml-6">
+                    <img class="w-40" src="{{ asset('/images/logo.png') }}" alt="Logotipas"/>
+                </div>
+                <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
+                    <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='/';" style="cursor: pointer;">
+                        <span class="material-icons m-2">
+                            notifications
+                        </span>
+                    </div>
+
+                    <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='/';" style="cursor: pointer;">
+                        <span class="m-2 material-icons hover:bg-gray-200">settings</span>
+                    </div>
+
+                    <div id="profile" onclick="location.href='/';" style="cursor: pointer;" class="flex items-center pr-2 hover:bg-gray-200">
+                        <span class="material-icons inline-block m-2">account_circle</span>
+                        <p href="#" class="inline-block">
+                            Vardas
+                        </p>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="flex items-center flex-wrap px-2 py-4 bg-gray-300">
+                <div class="flex items-center flex-shrink-0 ml-6">
+                    <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='{{ path('app_new_ad') }}';">Naujas skelbimas</button>
+                </div>
+                <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
+                    <div>
+                        <input class="rounded w-64 py-2 px-3" id="search" type="text" placeholder="Įveskite paieškos frazę">
+                    </div>
+                    <div class="pl-2">
+                        <input class="rounded w-40 py-2 px-3" id="city" type="text" placeholder="Miestas">
+                    </div>
+                    <div class="pl-2">
+                        <span class="material-icons bg-blue-400 hover:bg-blue-500 py-2 px-2 rounded">search</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
         {% block body %}{% endblock %}
     </body>
 </html>

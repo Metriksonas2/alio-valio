@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="w-full block flex justify-center py-2">
+            <h1 class="text-4xl header-font">Naujas skelbimas</h1>
+        </div>
+
+        <div class="px-36 border">
+            <div class="grid grid-cols-4">
+                <div class="py-3">
+                    <h4 class="pb-1">Gamintojas:</h4>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Modelis:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Variklio galia:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="W">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Baterijos talpa:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="Ah">
+                </div>
+
+                <div class="py-3">
+                    <h4 class="pb-1">Paspirtuko svoris:</h4>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="kg">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Didžiausias greitis:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="km/h">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Nuvažiuojamas atstumas:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="km">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Baterijos įkrovimo laikas:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="min.">
+                </div>
+
+                <div class="py-3">
+                    <p class="pb-1">Didžiausias leistinas svoris:</p>
+                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="kg">
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Ekranas:</p>
+                    <div class="relative">
+                        <select class="block appearance-none w-56 border py-2 px-2 rounded" id="grid-state">
+                            <option>-------------</option>
+                            <option>Yra</option>
+                            <option>Nėra</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Apšvietimas:</p>
+                    <div class="relative">
+                        <select class="block appearance-none w-56 border py-2 px-2 rounded" id="grid-state">
+                            <option>-------------</option>
+                            <option>Yra</option>
+                            <option>Nėra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-3 grid grid-cols-5">
+                <div class="col-span-3 pr-10">
+                    <p class="pb-1">Aprašymas:</p>
+                    <textarea class="w-full h-64" name="description"></textarea>
+                </div>
+
+                <div class="col-span-2">
+                    <p class="pb-1">Nuotraukų įkėlimas:</p>
+                    <input type="file" multiple>
+                    <div class="grid grid-cols-3">
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-36 py-3 flex">
+            <div>
+                <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="Kaina">
+            </div>
+            <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
+                <div>
+                    <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/main_header.html';">Atšaukti</button>
+                </div>
+                <div class="pl-2">
+                    <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/item.html';">Įkelti skelbimą</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
