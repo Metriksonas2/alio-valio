@@ -4,7 +4,7 @@
     <div class="flex items-center flex-wrap px-2 py-4 bg-gray-300">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="flex items-center flex-shrink-0 ml-6">
-                <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='{{ path('app_new_ad') }}';">Naujas skelbimas</button>
+                <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='{{ path('app_ad_new') }}';">Naujas skelbimas</button>
             </div>
         {% endif %}
         <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
