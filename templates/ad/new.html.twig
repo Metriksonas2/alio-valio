@@ -9,6 +9,10 @@
         {{ form_start(scooterForm) }}
         <div class="px-36 border">
             <div class="grid grid-cols-4">
+                <div class="py-3 col-span-4">
+                    <h4 class="mt-3 pb-1 text-center">Skelbimo pavadinimas:</h4>
+                    <input type="text" class="border rounded w-full py-2 px-2" name="name">
+                </div>
                 <div class="py-3">
                     <h4 class="pb-1">Gamintojas:</h4>
                     {{ form_row(scooterForm.manufacturer)}}
@@ -96,6 +100,7 @@
 
         <div class="px-36 py-3 flex">
             <div>
+                <p class="pb-1">Kaina:</p>
                 <input class="border rounded w-56 py-2 px-2" id="search" type="text" name="price" placeholder="Kaina">
             </div>
             <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">

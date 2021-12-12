@@ -30,7 +30,7 @@
                             </span>
                         </div>
 
-                        <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='/';" style="cursor: pointer;">
+                        <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='{{ path('app_profile') }}';" style="cursor: pointer;">
                             <span class="m-2 material-icons hover:bg-gray-200">settings</span>
                         </div>
 
@@ -38,7 +38,7 @@
                             <button id="profile" class="flex items-center pr-2 hover:bg-gray-200 pointer-cursor" data-dropdown-toggle="user-menu">
                                 <span class="material-icons inline-block m-2">account_circle</span>
                                 <p href="#" class="inline-block">
-                                    Vardas
+                                    {{ app.user.firstName }}
                                 </p>
                             </button>
                             <div id="user-menu" class="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow-lg w-44 bg-gray-100">
