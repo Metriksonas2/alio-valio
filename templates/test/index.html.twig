@@ -38,75 +38,47 @@
     </div>
 
     <div id="layoutRows" class="flex flex-col">
-        <div name="adItem" class="w-9/12 ml-auto mr-auto mt-4 hover:bg-gray-100 bg-white cursor-pointer" onclick="location.href='/';">
-            <div class="border-b h-40 grid grid-cols-4">
-                <div class="h-full p-2">
-                    <img class="h-full w-10/12 ml-auto mr-auto" alt="Skelbimo nuotrauka">
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Skelbimo pavadinimas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Miestas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Kaina</p>
-                </div>
-            </div>
-        </div>
-
-        <div name="adItem" class="w-9/12 ml-auto mr-auto mt-4 hover:bg-gray-100 bg-white cursor-pointer" onclick="changeLayout()">
-            <div class="border-b h-40 grid grid-cols-4">
-                <div class="h-full p-2">
-                    <img class="h-full w-10/12 ml-auto mr-auto" alt="Skelbimo nuotrauka">
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Skelbimo pavadinimas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Miestas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Kaina</p>
+        {% for ad in ads %}
+            <div name="adItem" class="w-9/12 ml-auto mr-auto mt-4 hover:bg-gray-100 bg-white cursor-pointer"
+                 onclick="location.href='{{ path('app_ad_view', { 'ad': ad.id }) }}';">
+                <div class="border-b h-40 grid grid-cols-4">
+                    <div class="h-full p-2">
+                        <img class="h-full w-10/12 ml-auto mr-auto" src="{{ asset('uploads/' ~ ad.scooter.image) }}" alt="Skelbimo nuotrauka">
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.name }}</p>
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.user.city }}</p>
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.price }} €</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
 
     <div id="layoutGrid" class="hidden flex flex-row flex-wrap ml-40 mr-40">
-        <div name="adItem" class="m-10 w-2/12 mt-4 hover:bg-gray-100 bg-white cursor-pointer" onclick="location.href='/';">
-            <div class="border h-auto grid grid-col">
-                <div class="h-40 p-2">
-                    <img class="h-full w-full ml-auto mr-auto" alt="Skelbimo nuotrauka">
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Skelbimo pavadinimas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Miestas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Kaina</p>
-                </div>
-            </div>
-        </div>
-
-        <div name="adItem" class="m-10 w-2/12 mt-4 hover:bg-gray-100 bg-white cursor-pointer" onclick="location.href='/';">
-            <div class="border h-auto grid grid-col">
-                <div class="h-40 p-2">
-                    <img class="h-full w-full ml-auto mr-auto" alt="Skelbimo nuotrauka">
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Skelbimo pavadinimas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Miestas</p>
-                </div>
-                <div class="grid place-items-center">
-                    <p class="text-center">Kaina</p>
+        {% for ad in ads %}
+            <div name="adItem" class="m-10 w-2/12 mt-4 hover:bg-gray-100 bg-white cursor-pointer"
+                 onclick="location.href='{{ path('app_ad_view', { 'ad': ad.id }) }}';">
+                <div class="border h-auto grid grid-col">
+                    <div class="h-40 p-2">
+                        <img class="h-full w-full ml-auto mr-auto" src="{{ asset('uploads/' ~ ad.scooter.image) }}" alt="Skelbimo nuotrauka">
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.name }}</p>
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.user.city }}</p>
+                    </div>
+                    <div class="grid place-items-center">
+                        <p class="text-center">{{ ad.price }} €</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
 
 

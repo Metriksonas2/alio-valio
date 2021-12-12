@@ -14,10 +14,12 @@ class AdConfigService
 {
     public function createAdObject(Request $request, UserInterface $user, Scooter $scooter)
     {
+        $name = $request->request->get('name');
         $description = $request->request->get('description');
         $price = $request->request->get('price');
 
         $ad = new Ad();
+        $ad->setName($name);
         $ad->setUser($user);
         $ad->setScooter($scooter);
         $ad->setDescription($description);
