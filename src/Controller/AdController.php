@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Entity\Scooter;
+use App\Enumerable\PartEnumTypeEnumerable;
 use App\Form\ScooterNewFormType;
 use App\Service\Ad\AdConfigService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdController extends AbstractController
 {
     /**
-     * @Route("/ad/new", name="app_new_ad")
+     * @Route("/ad/new", name="app_ad_new")
      */
     public function new(Request $request, AdConfigService $adConfigService, EntityManagerInterface $entityManager)
     {
@@ -41,6 +42,20 @@ class AdController extends AbstractController
         }
         return $this->render('ad/new.html.twig', [
             'scooterForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/ad/{ad}", name="app_ad_view")
+     */
+    public function view(Request $request, Ad $ad, AdConfigService $adConfigService, PartEnumTypeEnumerable $partEnumType)
+    {
+        $scooter = $ad->getScooter();
+
+        return $this->render('ad/view.html.twig', [
+            'ad' => $ad,
+            'scooter' => $scooter,
+            'partType' => $partEnumType->getType($scooter->getPartType()) ?? 'Ne dalis'
         ]);
     }
 }

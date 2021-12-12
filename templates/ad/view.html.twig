@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="py-4 px-6">
+        <h1 class="text-4xl header-font">Paspirtukas modelinis</h1>
+    </div>
+
+    <div class="h-screen">
+        <div class="grid grid-cols-2">
+            <div class="px-4 h-auto">
+                <div class="w-11/12 h-2/4 border-dashed border-2 m-2">
+                    <img src="{{ asset('uploads/' ~ scooter.image) }}" alt="">
+                </div>
+{#                <div class="mx-2">#}
+{#                    <div class="w-24 h-24 border-dashed border-2 my-2 mr-8 inline-block"></div>#}
+{#                    <div class="w-24 h-24 border-dashed border-2 my-2 mr-8 inline-block"></div>#}
+{#                    <div class="w-24 h-24 border-dashed border-2 my-2 mr-8 inline-block"></div>#}
+{#                    <div class="w-24 h-24 border-dashed border-2 my-2 mr-8 inline-block"></div>#}
+{#                    <div class="w-24 h-24 border-dashed border-2 my-2 mr-8 inline-block"></div>#}
+{#                </div>#}
+
+                <div class="p-3 border">
+                    <div class="p-3">
+                        <p class="font-bold">Komentarai:</p>
+                    </div>
+                    <div class="p-3">
+                        <h1 class="text-gray-400">Vardas:</h1>
+                        <p>Komentaro tekstas</p>
+                    </div>
+                    <div class="p-3">
+                        <h1 class="text-gray-400">Vardas:</h1>
+                        <p>Komentaro tekstas</p>
+                    </div>
+                    <div class="p-3">
+                        <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="Įrašykite savo komentarą">
+                        <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">Komentuoti</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="grid grid-cols-5">
+                        <div class="col-span-2 text-gray-400">
+                            <p class="py-2">Gamintojas:</p>
+                            <p class="py-2">Modelis:</p>
+                            <p class="py-2">Variklio galia:</p>
+                            <p class="py-2">Baterijos talpa:</p>
+                            <p class="py-2">Paspirtuko svoris:</p>
+                            <p class="py-2">Didžiausias greitis:</p>
+                            <p class="py-2">Nuvažiuojamas atstumas:</p>
+                            <p class="py-2">Baterijos įkrovimo laikas:</p>
+                            <p class="py-2">Didžiausias leistinas svoris:</p>
+
+                            <p class="py-2 pr-1 inline-block">Ekranas:</p>
+                            <p class="inline-block pr-6 text-black">
+                                {% if scooter.hasScreen == true %}
+                                    Yra
+                                {% else %}
+                                    Nėra
+                                {% endif %}
+                            </p>
+                            <p class="py-2 pl-1 pr-1 inline-block">Apšvietimas:</p>
+                            <p class="inline-block text-black">
+                                {% if scooter.hasLight == true %}
+                                    Yra
+                                {% else %}
+                                    Nėra
+                                {% endif %}
+                            </p>
+                            <br>
+                            <p class="py-2 pr-1 inline-block">Paspirtuko dalis:</p>
+                            <p class="inline-block pr-6 text-black">
+                                {% if scooter.isPart == true %}
+                                    Taip
+                                {% else %}
+                                    Ne
+                                {% endif %}
+                            </p>
+                            <br>
+                            {% if scooter.isPart == true %}
+                                <p class="py-2 pl-1 pr-1 inline-block">Dalies tipas:</p>
+                                <p class="inline-block text-black">
+                                    {{ partType }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="col-span-3">
+                            <p class="py-2">{{ scooter.manufacturer }}</p>
+                            <p class="py-2">{{ scooter.model }}</p>
+                            <p class="py-2">{{ scooter.power }} W</p>
+                            <p class="py-2">{{ scooter.batteryCapacity }} Ah</p>
+                            <p class="py-2">{{ scooter.weight }} kg</p>
+                            <p class="py-2">{{ scooter.maxSpeed }} km/h</p>
+                            <p class="py-2">{{ scooter.maxDistance }} km</p>
+                            <p class="py-2">{{ scooter.batteryCapacity }} min</p>
+                            <p class="py-2">{{ scooter.maxWeight }} kg</p>
+                        </div>
+                    </div>
+
+                    <div class="py-4">
+							<textarea class="w-11/12 h-64 border-2 border-black" name="description" readonly>{{ ad.description }}
+                            </textarea>
+                    </div>
+                </div>
+
+                <div class="p-3 flex">
+                    <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
+                        <div>
+                            <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">Ištrinti</button>
+                        </div>
+                        <div class="pl-2">
+                            <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/new_item.html';">Redaguoti skelbimą</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
