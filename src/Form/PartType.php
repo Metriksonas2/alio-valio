@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Enumerable\PartEnumTypeEnumerable;
+use App\Enumerable\PartEnumType;
 use App\Enumerable\PartTypeInterface;
 use App\Enumerable\EnumTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,13 +19,13 @@ class PartType extends \Symfony\Component\Form\AbstractType
             ],
             'choices' => [
                 '-------------' => null,
-                'Variklis' => PartEnumTypeEnumerable::TYPE_ENGINE,
-                'Važiuoklė' => PartEnumTypeEnumerable::TYPE_CARRIER,
-                'Stabdžiai' => PartEnumTypeEnumerable::TYPE_BREAKS,
-                'Korpusas' => PartEnumTypeEnumerable::TYPE_BODY,
-                'Apšvietimas' => PartEnumTypeEnumerable::TYPE_LIGHT,
-                'Baterija' => PartEnumTypeEnumerable::TYPE_BATTERY,
-                'Kita elektronika' => PartEnumTypeEnumerable::TYPE_OTHER,
+                'Variklis' => PartEnumType::TYPE_ENGINE,
+                'Važiuoklė' => PartEnumType::TYPE_CARRIER,
+                'Stabdžiai' => PartEnumType::TYPE_BREAKS,
+                'Korpusas' => PartEnumType::TYPE_BODY,
+                'Apšvietimas' => PartEnumType::TYPE_LIGHT,
+                'Baterija' => PartEnumType::TYPE_BATTERY,
+                'Kita elektronika' => PartEnumType::TYPE_OTHER,
             ],
         ]);
     }

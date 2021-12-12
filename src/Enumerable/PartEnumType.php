@@ -2,7 +2,7 @@
 
 namespace App\Enumerable;
 
-class PartEnumTypeEnumerable extends AbstractEnumEnumType
+class PartEnumType extends AbstractEnumType
 {
     public const TYPE_ENGINE = 1;
     public const TYPE_CARRIER = 2;

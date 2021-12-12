@@ -2,7 +2,7 @@
 
 namespace App\Enumerable;
 
-abstract class AbstractEnumEnumType implements EnumTypeInterface
+abstract class AbstractEnumType implements EnumTypeInterface
 {
     public function getType(?int $id): mixed
     {

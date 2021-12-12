@@ -19,7 +19,7 @@
     </head>
     <body>
             <nav class="flex items-center flex-wrap p-2 pb-0 shadow">
-                <div class="flex items-center flex-shrink-0 ml-6 cursor-pointer" onclick="location.href='/';">
+                <div class="flex items-center flex-shrink-0 ml-6 cursor-pointer" onclick="location.href='{{ path('app_index') }}';">
                     <img class="w-40" src="{{ asset('/images/logo.png') }}" alt="Logotipas"/>
                 </div>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -30,7 +30,7 @@
                             </span>
                         </div>
 
-                        <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='/';" style="cursor: pointer;">
+                        <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='{{ path('app_profile') }}';" style="cursor: pointer;">
                             <span class="m-2 material-icons hover:bg-gray-200">settings</span>
                         </div>
 
