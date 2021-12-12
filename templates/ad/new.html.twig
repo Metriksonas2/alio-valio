@@ -6,64 +6,69 @@
             <h1 class="text-4xl header-font">Naujas skelbimas</h1>
         </div>
 
+        {{ form_start(scooterForm) }}
         <div class="px-36 border">
             <div class="grid grid-cols-4">
                 <div class="py-3">
                     <h4 class="pb-1">Gamintojas:</h4>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text">
+                    {{ form_row(scooterForm.manufacturer)}}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Modelis:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text">
+                    {{ form_row(scooterForm.model)}}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Variklio galia:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="W">
+                    {{ form_row(scooterForm.power) }}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Baterijos talpa:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="Ah">
+                    {{ form_row(scooterForm.batteryCapacity) }}
                 </div>
 
                 <div class="py-3">
                     <h4 class="pb-1">Paspirtuko svoris:</h4>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="kg">
+                    {{ form_row(scooterForm.weight) }}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Didžiausias greitis:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="km/h">
+                    {{ form_row(scooterForm.maxSpeed) }}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Nuvažiuojamas atstumas:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="km">
+                    {{ form_row(scooterForm.maxDistance) }}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Baterijos įkrovimo laikas:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="min.">
+                    {{ form_row(scooterForm.batteryChargeTime) }}
                 </div>
 
                 <div class="py-3">
                     <p class="pb-1">Didžiausias leistinas svoris:</p>
-                    <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="kg">
+                    {{ form_row(scooterForm.maxWeight) }}
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Ekranas:</p>
                     <div class="relative">
-                        <select class="block appearance-none w-56 border py-2 px-2 rounded" id="grid-state">
-                            <option>-------------</option>
-                            <option>Yra</option>
-                            <option>Nėra</option>
-                        </select>
+                        {{ form_row(scooterForm.hasScreen) }}
                     </div>
                 </div>
                 <div class="py-3">
                     <p class="pb-1">Apšvietimas:</p>
                     <div class="relative">
-                        <select class="block appearance-none w-56 border py-2 px-2 rounded" id="grid-state">
-                            <option>-------------</option>
-                            <option>Yra</option>
-                            <option>Nėra</option>
-                        </select>
+                        {{ form_row(scooterForm.hasLight) }}
+                    </div>
+                </div>
+                <div class="py-3">
+                    <p class="pb-1">Paspirtuko dalis:</p>
+                    <div class="relative">
+                        {{ form_row(scooterForm.isPart) }}
+                    </div>
+                </div>
+                <div class="py-3" id="part-type">
+                    <p class="pb-1">Dalies tipas:</p>
+                    <div class="relative">
+                        {{ form_row(scooterForm.partType) }}
                     </div>
                 </div>
             </div>
@@ -76,31 +81,47 @@
 
                 <div class="col-span-2">
                     <p class="pb-1">Nuotraukų įkėlimas:</p>
-                    <input type="file" multiple>
-                    <div class="grid grid-cols-3">
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>
-                    </div>
+                    {{ form_row(scooterForm.image) }}
+{#                    <div class="grid grid-cols-3">#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                        <div class="w-24 h-24 border-dashed border-2 my-3"></div>#}
+{#                    </div>#}
                 </div>
             </div>
         </div>
 
         <div class="px-36 py-3 flex">
             <div>
-                <input class="border rounded w-56 py-2 px-2" id="search" type="text" placeholder="Kaina">
+                <input class="border rounded w-56 py-2 px-2" id="search" type="text" name="price" placeholder="Kaina">
             </div>
             <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
                 <div>
-                    <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/main_header.html';">Atšaukti</button>
+                    <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='{{ path('app_index') }}';">Atšaukti</button>
                 </div>
                 <div class="pl-2">
-                    <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/item.html';">Įkelti skelbimą</button>
+                    <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" type="submit">Įkelti skelbimą</button>
                 </div>
             </div>
         </div>
+        {{ form_end(scooterForm) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            $('#part-type').hide();
+
+            $('select[id="scooter_new_form_isPart"]').change(function(){
+                $('#part-type').toggle();
+                $('select[id="scooter_new_form_partType"]').val(0);
+            });
+        });
+    </script>
 {% endblock %}
