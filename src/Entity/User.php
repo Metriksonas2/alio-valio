@@ -96,6 +96,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $ads;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -127,7 +132,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     public function getRoles(): array
@@ -258,13 +270,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->createdAt;
     }
 
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
      * @return Collection|SystemNotification[]
      */
@@ -321,6 +326,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $ad->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

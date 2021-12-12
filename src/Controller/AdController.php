@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Entity\Scooter;
-use App\Enumerable\PartEnumTypeEnumerable;
+use App\Enumerable\PartEnumType;
 use App\Form\ScooterNewFormType;
 use App\Service\Ad\AdConfigService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,7 +48,7 @@ class AdController extends AbstractController
     /**
      * @Route("/ad/{ad}", name="app_ad_view")
      */
-    public function view(Request $request, Ad $ad, AdConfigService $adConfigService, PartEnumTypeEnumerable $partEnumType)
+    public function view(Request $request, Ad $ad, AdConfigService $adConfigService, PartEnumType $partEnumType)
     {
         $scooter = $ad->getScooter();
 
