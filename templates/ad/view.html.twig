@@ -99,18 +99,19 @@
                     </div>
                 </div>
 
-                <div class="p-3 flex">
-                    <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
-                        {% if app.user.id is same as(ad.user.id) %}
+                {% if app.user.id == ad.getUser().id %}
+                    <div class="p-3 flex">
+                        <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
                             <div>
-                                <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">Ištrinti</button>
+                                <button onclick="location.href='{{ path('app_ad_delete', { 'ad': ad.id }) }}';" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">Ištrinti</button>
                             </div>
-                        {% endif %}
-                        <div class="pl-2">
-                            <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='/pages/new_item.html';">Redaguoti skelbimą</button>
+                            <div class="pl-2">
+                                <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="location.href='{{ path('app_ad_edit', { 'ad': ad.id }) }}';">Redaguoti skelbimą</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
