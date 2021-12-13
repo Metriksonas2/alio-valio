@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <form action="{{ path('app_index') }}" method="post">
     <div class="flex items-center flex-wrap px-2 py-4 bg-gray-300">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="flex items-center flex-shrink-0 ml-6">
@@ -17,19 +18,16 @@
                 </button>
             </div>
 
-            <form action="{{ path('app_index') }}" method="post">
                 <div>
                     <input class="rounded w-64 py-2 px-3" id="search" name="search" type="text" placeholder="Įveskite paieškos frazę">
-                </div>
-                <div class="pl-2">
-                    <input class="rounded w-40 py-2 px-3" id="city" name="city" type="text" placeholder="Miestas">
                 </div>
                 <button class="pl-2" type="submit">
                     <span class="material-icons bg-blue-400 hover:bg-blue-500 py-2 px-2 rounded">search</span>
                 </button>
-            </form>
+
         </div>
     </div>
+    </form>
 
     <div style="width: 80%; margin: 0 auto;">
         {% for success in app.flashes('success') %}
