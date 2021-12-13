@@ -5,6 +5,7 @@ namespace App\Service\Ad;
 use App\Entity\Ad;
 use App\Entity\Scooter;
 use App\Entity\User;
+use App\Repository\AdRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AdConfigService
 {
-    public function createAdObject(Request $request, UserInterface $user, Scooter $scooter)
+    public function createAdObject(Request $request, UserInterface $user, Scooter $scooter): Ad
     {
         $name = $request->request->get('name');
         $description = $request->request->get('description');
@@ -43,5 +44,22 @@ class AdConfigService
         $file->move($uploadsDirectory, $fileName);
 
         $scooter->setImage($fileName);
+    }
+
+    public function getAdsForHomePage(Request $request, AdRepository $adRepository): array
+    {
+        if($request->getMethod() === 'POST') {
+            $searchQuery = $request->request->get('search');
+
+            $ads = $adRepository->createQueryBuilder('a')
+                ->where('a.name LIKE :search')
+                ->setParameter('search', '%'. $searchQuery . '%')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $ads = $adRepository->findAll();
+        }
+
+        return $ads;
     }
 }

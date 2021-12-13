@@ -7,6 +7,7 @@ use App\Entity\Scooter;
 use App\Enumerable\PartEnumType;
 use App\Form\ScooterNewFormType;
 use App\Service\Ad\AdConfigService;
+use App\Service\PaymentHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,8 @@ class AdController extends AbstractController
     /**
      * @Route("/ad/new", name="app_ad_new")
      */
-    public function new(Request $request, AdConfigService $adConfigService, EntityManagerInterface $entityManager)
+    public function new(Request $request, AdConfigService $adConfigService,
+                        PaymentHandler $paymentHandler, EntityManagerInterface $entityManager, $stripeSk)
     {
         $scooter = new Scooter();
         $form = $this->createForm(ScooterNewFormType::class, $scooter);
@@ -37,12 +39,40 @@ class AdController extends AbstractController
             $entityManager->persist($ad);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Skelbimas pridėtas sėkmingai!');
-            return $this->redirectToRoute('app_index');
+            $session = $paymentHandler->createPaymentGateway($request, $stripeSk, $ad);
+
+            return $this->redirect($session->url, 303);
         }
         return $this->render('ad/new.html.twig', [
             'scooterForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/ad/success", name="app_ad_success")
+     */
+    public function success(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        $this->addFlash('success', 'Skelbimas pridėtas sėkmingai!');
+        return $this->redirectToRoute('app_ad_view', [
+            'ad' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/ad/cancel", name="app_ad_cancel")
+     */
+    public function cancel(Request $request, EntityManagerInterface $entityManager)
+    {
+        $id = $request->query->get('id');
+        $ad = $entityManager->getRepository(Ad::class)->find($id);
+        $entityManager->remove($ad);
+        $entityManager->flush();
+
+        $this->addFlash('error', 'Įvyko klaida atliekant mokėjimą');
+        return $this->redirectToRoute('app_index');
     }
 
     /**
