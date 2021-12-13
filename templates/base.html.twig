@@ -24,11 +24,6 @@
                 </div>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <div class="w-full block flex-grow flex lg:w-auto justify-end mr-6">
-                        <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='/';" style="cursor: pointer;">
-                            <span class="material-icons m-2">
-                                notifications
-                            </span>
-                        </div>
 
                         <div class="flex items-center hover:bg-gray-200 border-r border-black" onclick="location.href='{{ path('app_profile') }}';" style="cursor: pointer;">
                             <span class="m-2 material-icons hover:bg-gray-200">settings</span>
@@ -46,9 +41,11 @@
                                     <li>
                                         <a href="{{ path('app_logout') }}" class="block px-4 py-1 hover:bg-gray-200">Atsijungti</a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="block px-4 py-1 hover:bg-gray-200">Admin</a>
-                                    </li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li>
+                                            <a href="{{ path('app_admin') }}" class="block px-4 py-1 hover:bg-gray-200">Admin</a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Entity\Scooter;
 use App\Enumerable\PartEnumType;
+use App\Form\ScooterEditFormType;
 use App\Form\ScooterNewFormType;
 use App\Service\Ad\AdConfigService;
 use App\Service\PaymentHandler;
@@ -43,6 +44,7 @@ class AdController extends AbstractController
 
             return $this->redirect($session->url, 303);
         }
+
         return $this->render('ad/new.html.twig', [
             'scooterForm' => $form->createView()
         ]);
@@ -86,6 +88,53 @@ class AdController extends AbstractController
             'ad' => $ad,
             'scooter' => $scooter,
             'partType' => $partEnumType->getType($scooter->getPartType()) ?? 'Ne dalis'
+        ]);
+    }
+
+    /**
+     * @Route("/ad/delete/{ad}", name="app_ad_delete")
+     */
+    public function delete(Ad $ad, EntityManagerInterface $entityManager)
+    {
+        if (is_null($ad)) {
+            throw $this->createNotFoundException("Tokio skelbimo nėra!");
+        }
+
+        $entityManager->remove($ad);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Skelbimas ištrintas sėkmingai!');
+        return $this->redirectToRoute('app_index');
+    }
+
+    /**
+     * @Route("/ad/edit/{ad}", name="app_ad_edit")
+     */
+    public function edit(Ad $ad, EntityManagerInterface $entityManager, Request $request, AdConfigService $adConfigService)
+    {
+        $scooter = $ad->getScooter();
+        $form = $this->createForm(ScooterEditFormType::class, $ad->getScooter());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $uploadsDirectory = $this->getParameter('uploads_directory');
+            $file = $request->files->get('scooter_edit_form')['image'];
+
+            $scooter->setAd($ad);
+            $scooter->setDateOfManufacture(new \DateTime('2018-08-24'));
+            $adConfigService->imageUpload($scooter, $file, $uploadsDirectory);
+
+            $entityManager->persist($scooter);
+            $entityManager->persist($ad);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Skelbimas atnaujintas sėkmingai!');
+            return $this->redirectToRoute('app_index');
+        }
+
+        return $this->render('ad/edit.html.twig', [
+            'scooterForm' => $form->createView(),
+            'scooter' => $scooter
         ]);
     }
 }
